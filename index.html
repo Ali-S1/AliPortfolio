@@ -382,28 +382,35 @@ I don’t stop until you’re satisfied. And if for any reason you feel I haven�
         });
 
         // Contact Form Submission Handling for Portfolio Site
-        const portfolioContactForm = document.getElementById('portfolio-contact-form');
-        const portfolioMessageBox = document.getElementById('portfolio-message-box');
-        const closePortfolioMessageBoxButton = document.getElementById('close-portfolio-message-box');
+        // Contact Form Submission Handling for Portfolio Site
+    const portfolioContactForm = document.getElementById('portfolio-contact-form');
+    const portfolioMessageBox = document.getElementById('portfolio-message-box');
+    const closePortfolioMessageBoxButton = document.getElementById('close-portfolio-message-box');
 
-        portfolioContactForm.addEventListener('submit', function(event) {
-            // event.preventDefault(); // Prevent default form submission
+    portfolioContactForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-            // In a real application, you would send this data to a server
-            // For this client-side example, we just simulate success.
-            console.log('Portfolio Form Submitted!');
-            console.log('Name:', document.getElementById('client-name').value);
-            console.log('Email:', document.getElementById('client-email').value);
-            console.log('Phone:', document.getElementById('client-phone').value);
-            console.log('Project Type:', document.getElementById('project-type').value);
-            console.log('Project Details:', document.getElementById('project-details').value);
+    const formData = new FormData(portfolioContactForm);
 
-            // Show the custom message box
-            portfolioMessageBox.classList.remove('hidden');
-
-            // Clear the form fields
-            contactForm.reset();
+    try {
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
         });
+
+        if (response.ok) {
+            portfolioMessageBox.classList.remove('hidden');
+            portfolioContactForm.reset();
+        } else {
+            alert('Submission failed. Please try again later.');
+        }
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting your request.');
+    }
+    });
+
 
         closePortfolioMessageBoxButton.addEventListener('click', function() {
             // Hide the custom message box
