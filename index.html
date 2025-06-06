@@ -292,8 +292,8 @@ I don’t stop until you’re satisfied. And if for any reason you feel I haven�
             <p class="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
                 Whether you choose a template or a custom build, I'm here to accelerate your vision online. Fill out the form below or reach out directly.
             </p>
-
-            <form id="portfolio-contact-form" class="bg-gray-50 p-8 rounded-xl shadow-xl">
+                <form name="contact" id="portfolio-contact-form" class="bg-gray-50 p-8 rounded-xl shadow-xl" netlify>
+                <input type="hidden" name="form-name" value="contact">
                 <div class="mb-6">
                     <label for="client-name" class="block text-gray-700 text-sm font-bold mb-2">Your Name:</label>
                     <input type="text" id="client-name" name="client-name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
@@ -387,7 +387,7 @@ I don’t stop until you’re satisfied. And if for any reason you feel I haven�
         const closePortfolioMessageBoxButton = document.getElementById('close-portfolio-message-box');
 
         portfolioContactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+            // event.preventDefault(); // Prevent default form submission
 
             // In a real application, you would send this data to a server
             // For this client-side example, we just simulate success.
